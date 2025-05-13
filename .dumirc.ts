@@ -18,7 +18,7 @@ export default defineConfig({
   favicons: [publicPath + 'logo-fill-64x64.png'],
   themeConfig: {
     logo: publicPath + 'logo-fill_100.png',
-    name: 'r-store',
+    name: 'r-model-store',
     nav: {
       'zh-CN': [{ title: '指南', link: '/guides' }],
       'en-US': [{ title: 'Guide', link: '/en-US/guides' }],

@@ -1,8 +1,8 @@
 import type { CheckboxProps } from 'antd';
 import { Checkbox as BaseCheckbox } from 'antd';
-import { Model } from 'r-store';
-import { useCreation } from 'r-store/hooks';
-import { arrayToObj } from 'r-store/utils';
+import { Model } from 'r-model-store';
+import { useCreation } from 'r-model-store/hooks';
+import { arrayToObj } from 'r-model-store/utils';
 import type { ReactNode } from 'react';
 import React, { createContext, useContext, useEffect, useMemo } from 'react';
 

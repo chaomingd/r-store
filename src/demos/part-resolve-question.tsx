@@ -1,4 +1,4 @@
-import { useModel } from 'r-store';
+import { useModel } from 'r-model-store';
 import { useDebounceFn } from 'ahooks';
 import React, { useEffect } from 'react';
 

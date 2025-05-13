@@ -1,4 +1,4 @@
-import { Model } from 'r-store';
+import { Model } from 'r-model-store';
 import { useCreation } from 'ahooks';
 import { produce } from 'immer';
 import React from 'react';

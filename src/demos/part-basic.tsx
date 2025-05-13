@@ -1,5 +1,5 @@
-import { Model } from 'r-store';
-import { useCreation } from 'r-store/hooks';
+import { Model } from 'r-model-store';
+import { useCreation } from 'r-model-store/hooks';
 import React from 'react';
 
 

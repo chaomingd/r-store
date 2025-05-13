@@ -1,4 +1,4 @@
-import { useModel } from 'r-store';
+import { useModel } from 'r-model-store';
 import React, { useMemo } from 'react';
 
 interface State {

@@ -1,4 +1,4 @@
-import { useModel } from 'r-store';
+import { useModel } from 'r-model-store';
 import React from 'react';
 
 function fetchApi(success: boolean): Promise<string> {

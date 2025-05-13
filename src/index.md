@@ -117,7 +117,7 @@ options:
 全局状态可根据功能拆分成多个Store，我们可以将多个Store通过一个类充当容器组合起来使用
 ```tsx | pure
 // stores/store1.ts
-import { Model } from 'r-store'
+import { Model } from 'r-model-store'
 
 interface State1 {...}
 
@@ -188,7 +188,7 @@ const Comp2 = () => {
 
 ```tsx | pure
 // stores/store1.ts
-import { Model } from 'r-store'
+import { Model } from 'r-model-store'
 
 interface State1 {...}
 
