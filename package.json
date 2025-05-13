@@ -1,5 +1,5 @@
 {
-  "name": "r-store",
+  "name": "r-model-store",
   "version": "0.0.1",
   "description": "react store",
   "module": "dist/index.js",
@@ -17,7 +17,6 @@
     "lint": "npm run lint:es && npm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "prepublishOnly": "father doctor && npm run build",
     "change:version": "pnpm changeset && changeset version && pnpm run git-build && pnpm run lint",
     "release": "pnpm login:repository && changeset publish && git push origin --tags",
     "login:repository": "sh scripts/pnpm-login.sh"
