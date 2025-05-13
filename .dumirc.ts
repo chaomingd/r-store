@@ -1,9 +1,13 @@
 import { defineConfig } from 'dumi';
 
+const isDev = process.env.NODE_ENV === 'development';
+
+const publicPath = isDev ? '/' : '/r-store/';
+
 export default defineConfig({
   outputPath: 'docs-dist',
-  base: '/r-store/',
-  publicPath: '/r-store/',
+  base: publicPath,
+  publicPath: publicPath,
   resolve: {
     atomDirs: [{ type: 'guide', dir: 'src' }]
   },
@@ -11,9 +15,9 @@ export default defineConfig({
     { id: 'zh-CN', name: '中文' },
     { id: 'en-US', name: 'EN' },
   ],
-  favicons: ['/logo-fill-64x64.png'],
+  favicons: [publicPath + 'logo-fill-64x64.png'],
   themeConfig: {
-    logo: '/logo-fill_100.png',
+    logo: publicPath + 'logo-fill_100.png',
     name: 'r-store',
     nav: {
       'zh-CN': [{ title: '指南', link: '/guides' }],
