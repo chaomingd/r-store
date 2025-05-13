@@ -1,6 +1,6 @@
 {
   "name": "r-model-store",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "react store",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
     "prepare": "husky install && dumi setup",
     "doctor": "father doctor",
     "lint": "npm run lint:es && npm run lint:css",
-    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
+    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\" 2> /dev/null",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "change:version": "pnpm changeset && changeset version && pnpm run git-build && pnpm run lint",
     "release": "pnpm login:repository && changeset publish && git push origin --tags",
