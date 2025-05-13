@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkr_store=self.webpackChunkr_store||[]).push([[904],{53028:function(o,r,n){n.r(r),n.d(r,{demos:function(){return s}});var _=n(75271),t=n(79493),s={}},94810:function(o,r,n){n.r(r),n.d(r,{texts:function(){return t}});var _=n(79493);const t=[{value:"r-store",paraId:0}]}}]);
