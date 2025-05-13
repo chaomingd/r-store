@@ -194,7 +194,7 @@ const CheckBoxGroup = (props: CheckBoxGroupProps) => {
 const Checkbox = (props: CheckboxProps & { value?: Key }) => {
   const { value, ...restProps } = props;
   const { model, useGroupKeys } = useContext(CheckBoxGroupContext);
-  const { valueMap } = model.useGetState(undefined, undefined, value);
+  const { valueMap } = model.useGetState();
   const isCheck = valueMap[value];
   useMemo(() => {
     if (!useGroupKeys) {

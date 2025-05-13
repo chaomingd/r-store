@@ -1,11 +1,14 @@
-import { arrayToObj, shallowEqualKeys, uuid } from './utils';
-import { useMemoizedFn } from './hooks';
-import { useCallback, useEffect, useMemo} from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import useSyncExternalStoreExports from 'use-sync-external-store/shim/with-selector';
 import type { AsyncManagerOptions } from './Manager/AsyncManager';
 import { AsyncManager } from './Manager/AsyncManager';
+import { useMemoizedFn } from './hooks';
 import type { IDispatchOptions, TComputed, TEqualityFn, TWatch } from './type';
-import { calcComputedState, execWatchHandler } from './utils';
+import {
+  calcComputedState,
+  execWatchHandler,
+  shallowEqualKeys,
+} from './utils';
 
 const { useSyncExternalStoreWithSelector } = useSyncExternalStoreExports;
 
@@ -15,9 +18,10 @@ type TSubscribeFunc<
   UserData extends Record<string, any> = Record<string, any>,
 > = (state: Model<TState, TEffects, UserData>, silent: boolean) => any;
 
-type IEffects<M extends Model<any, any>> = Record<string, ((this: M, ...args: any[]) => any) | any>;
-
-const DEFAULT_SUBSCRIBE_NAME = 'reactStoreSubscribe';
+type IEffects<M extends Model<any, any>> = Record<
+  string,
+  ((this: M, ...args: any[]) => any) | any
+>;
 
 export interface IModelConfig<
   TState extends Record<string, any> = Record<string, any>,
@@ -28,7 +32,10 @@ export interface IModelConfig<
   state: TState;
   effects?: Partial<TEffects>;
   onStateChange?: (prevState: TState, currentState: TState) => any;
-  modifyState?: (prevState: TState, nextState: TState) => Partial<TState> | null;
+  modifyState?: (
+    prevState: TState,
+    nextState: TState,
+  ) => Partial<TState> | null;
   watch?: TWatch<TState>;
   computed?: TComputed<TState>;
   userData?: UserData;
@@ -36,7 +43,9 @@ export interface IModelConfig<
 }
 export class Model<
   TState extends Record<string, any> = Record<string, any>,
-  TEffects extends IEffects<Model<TState, TEffects>> = IEffects<Model<TState, any, any>>,
+  TEffects extends IEffects<Model<TState, TEffects>> = IEffects<
+    Model<TState, any, any>
+  >,
   UserData extends Record<string, any> = Record<string, any>,
 > {
   isUnMount = false;
@@ -46,7 +55,7 @@ export class Model<
   _effects = {} as TEffects;
   _preState: TState = {} as TState;
   _dispatchSignal: string = '';
-  _subscribes: Record<string, TSubscribeFunc<TState, TEffects, UserData>[]> = {};
+  _subscribes: TSubscribeFunc<TState, TEffects, UserData>[] = [];
   asyncManagerMap: Record<
     string,
     AsyncManager<
@@ -90,7 +99,12 @@ export class Model<
       showLoading?: boolean;
     },
   ) {
-    const { loadingKey = 'loading', errorKey = 'error', showLoading = true, config } = (options || {});
+    const {
+      loadingKey = 'loading',
+      errorKey = 'error',
+      showLoading = true,
+      config,
+    } = options || {};
     if (!this.asyncManagerMap[name]) {
       this.asyncManagerMap[name] = new AsyncManager(config);
     }
@@ -119,23 +133,15 @@ export class Model<
     });
     return this.asyncManagerMap[name];
   }
-  subscribe(func: TSubscribeFunc<TState, TEffects, UserData>, name?: string) {
-    const subscribeName = this.getSubscribeName(name);
-    if (!this._subscribes[subscribeName]) {
-      this._subscribes[subscribeName] = [];
-    }
-    this._subscribes[subscribeName].push(func);
+  subscribe(func: TSubscribeFunc<TState, TEffects, UserData>) {
+    this._subscribes.push(func);
     return () => {
-      this.unsubscribe(func, name);
+      this.unsubscribe(func);
     };
   }
-  getSubscribeName(name?: string) {
-    return name || DEFAULT_SUBSCRIBE_NAME;
-  }
-  unsubscribe(func: TSubscribeFunc<TState, TEffects, UserData>, name?: string) {
-    const subscribeName = this.getSubscribeName(name);
-    if (this._subscribes[subscribeName] && this._subscribes[subscribeName].length) {
-      this._subscribes[subscribeName] = this._subscribes[subscribeName].filter((fn) => fn !== func);
+  unsubscribe(func: TSubscribeFunc<TState, TEffects, UserData>) {
+    if (this._subscribes.length) {
+      this._subscribes = this._subscribes.filter((fn) => fn !== func);
     }
   }
   getUserData() {
@@ -155,7 +161,8 @@ export class Model<
         this.state = this.getActualState(this._preState, state);
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      this.config.onStateChange && this.config.onStateChange(this._preState, this.getState());
+      this.config.onStateChange &&
+        this.config.onStateChange(this._preState, this.getState());
       this.dispatch(options);
       this._preState = { ...this.state };
     }
@@ -189,27 +196,17 @@ export class Model<
   };
   dispatch(options?: IDispatchOptions) {
     if (this.isUnMount) return;
-    let subscribeNames = Object.keys(this._subscribes);
-    if (options) {
-      if (options.include) {
-        const includeNameMap = arrayToObj(options.include);
-        subscribeNames = subscribeNames.filter((name) => includeNameMap[name]);
-      }
-      if (options.exclude) {
-        const excludeNameMap = arrayToObj(options.exclude);
-        subscribeNames = subscribeNames.filter((name) => !excludeNameMap[name]);
-      }
-    }
-    this._dispatchSignal = uuid();
-    subscribeNames.forEach((subscribeName) => {
-      if (this._subscribes[subscribeName]) {
-        this._subscribes[subscribeName].forEach((func) => func(this, options?.silent || false));
-      }
-    });
+    this._subscribes.forEach((func) =>
+      func(this, options?.silent || false),
+    );
   }
-  setEffect<M extends TEffects[keyof TEffects]>(name: keyof TEffects, effect: M) {
+  setEffect<M extends TEffects[keyof TEffects]>(
+    name: keyof TEffects,
+    effect: M,
+  ) {
     if (this._effects[name] !== effect) {
-      this._effects[name] = typeof effect === 'function' ? effect.bind(this) : effect;
+      this._effects[name] =
+        typeof effect === 'function' ? effect.bind(this) : effect;
     }
   }
   setEffects(effects: Partial<TEffects>) {
@@ -218,7 +215,9 @@ export class Model<
     });
   }
   getEffect<Name extends keyof TEffects>(name: Name) {
-    return (...args: Parameters<TEffects[Name]>): ReturnType<TEffects[Name]> => {
+    return (
+      ...args: Parameters<TEffects[Name]>
+    ): ReturnType<TEffects[Name]> => {
       return this._effects[name].apply(this, args);
     };
   }
@@ -226,15 +225,18 @@ export class Model<
     this._effects = {} as TEffects;
     this.state = {} as TState;
   }
-  useSelector = (equalityFn?: TEqualityFn<TState>, name?: string) => {
+  useSelector = (equalityFn?: TEqualityFn<TState>) => {
     // eslint-disable-next-line
-    const subscribe = useCallback((listener: () => void) => {
-      return this.subscribe((_, silent) => {
-        if (!silent) {
-          listener();
-        }
-      }, name);
-    }, [this]);
+    const subscribe = useCallback(
+      (listener: () => void) => {
+        return this.subscribe((_, silent) => {
+          if (!silent) {
+            listener();
+          }
+        });
+      },
+      [this],
+    );
     const selector = useMemoizedFn((state: TState) => state);
     const isEqual = useMemoizedFn((prevState: TState, nextState: TState) => {
       if (equalityFn) {
@@ -254,7 +256,6 @@ export class Model<
   useGetState = <Key extends keyof TState & string>(
     keys?: Key[],
     equalityFn?: TEqualityFn<TState>,
-    name?: string,
   ) => {
     return this.useSelector((prevState, nextState) => {
       if (keys && shallowEqualKeys(prevState, nextState, keys)) {
@@ -264,13 +265,13 @@ export class Model<
         return true;
       }
       return false;
-    }, name);
+    });
   };
   subscribeWithKeys<Key extends keyof TState & string>(
     func: TSubscribeFunc<TState, TEffects>,
-    options: { keys?: Key[]; equalityFn?: TEqualityFn<TState>; name?: string },
+    options: { keys?: Key[]; equalityFn?: TEqualityFn<TState> },
   ) {
-    const { keys, equalityFn, name } = options;
+    const { keys, equalityFn } = options;
     return this.subscribe((_, silent) => {
       const nextState = this.getState();
       if (keys && shallowEqualKeys(this._preState, nextState, keys)) {
@@ -280,7 +281,7 @@ export class Model<
         return;
       }
       func(this, silent);
-    }, name);
+    });
   }
 }
 

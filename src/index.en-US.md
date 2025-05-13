@@ -75,12 +75,15 @@ useModel 实际上就是对上述例子中 useCreation 和 实例化 Model 过�
 <code src="./demos/part-question.tsx"></code>
 
 #### 使用 AsyncManger 处理请求竞态问题
+
 <code src="./demos/part-resolve-question.tsx"></code>
 :::info
 
 ```bash | pure
 asyncManager(name: string, options: {
   loadingKey?: string;
+  errorKey?: string;
+  showLoading?: boolean;
   config?: {
     retryCount?: number;
     retryInterval?: number;
@@ -88,7 +91,9 @@ asyncManager(name: string, options: {
 }).exec(fn)
 name: 唯一标识，不重复即可
 options:
-- loadingKey: loading状态的key值
+- loadingKey: loading状态的key值 -> this.setState()
+- errorKey: 当发生错误时设置的error的key值 -> this.setState({error: error})
+- showLoading?: 是否启用loading, 设置为false则不会更改loading值;
 - config:
   - retryCount: fn 方法出错是重试的次数
   - retryInterval 重试的时间间隔(ms)，默认 300ms

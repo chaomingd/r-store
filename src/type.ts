@@ -19,8 +19,6 @@ export type TComputed<TState extends Record<string, any>> = (| {
   | ((state: TState, prevState: TState) => Partial<TState>))[];
 
 export interface IDispatchOptions {
-  include?: string[];
-  exclude?: string[];
   silent?: boolean;
 }
 
