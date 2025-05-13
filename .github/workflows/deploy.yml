@@ -12,17 +12,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: '18' # 根据你的项目需求选择版本
-          package-manager: 'pnpm'
+          version: 10
+      - name: 使用 Nnode.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
-      - name: Install dependencies
+      - name: 安装依赖
         run: pnpm install
 
       - name: Build project
-        run: npm run docs:build
+        run: pnpm docs:build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
