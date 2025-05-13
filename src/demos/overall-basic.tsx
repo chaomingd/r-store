@@ -1,4 +1,4 @@
-import { Model } from 'r-model-store';
+import { Model } from '@cm/r-store';
 import React from 'react';
 
 type State = {

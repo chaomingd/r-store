@@ -1,6 +1,6 @@
 {
-  "name": "r-model-store",
-  "version": "0.0.2",
+  "name": "@cm/r-store",
+  "version": "0.0.1",
   "description": "react store",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
