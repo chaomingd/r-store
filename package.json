@@ -1,7 +1,8 @@
 {
   "name": "r-model-store",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple and easy-to-use react state management library",
+  "homepage": "https://chaomingd.github.io/r-store",
   "keywords": [
     "react",
     "state management",
@@ -19,7 +20,6 @@
     "start": "npm run dev",
     "dev": "dumi dev",
     "build": "father build",
-    "git-build": "pnpm run --if-present --recursive --filter \"...[origin/main]\" build",
     "build:watch": "father dev",
     "docs:build": "dumi build",
     "docs:preview": "dumi preview",
@@ -28,7 +28,7 @@
     "lint": "npm run lint:es && npm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\" 2> /dev/null",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "change:version": "pnpm changeset && changeset version && pnpm run git-build && pnpm run lint",
+    "change:version": "pnpm changeset && changeset version && pnpm run build && pnpm run lint",
     "release": "pnpm login:repository && changeset publish && git push origin --tags",
     "login:repository": "sh scripts/pnpm-login.sh"
   },
