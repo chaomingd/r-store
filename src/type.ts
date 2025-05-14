@@ -5,8 +5,8 @@ export type TEqualityFn<TState extends Record<string, any>> = (
 export type TPromiseValue<T> = T | Promise<T>;
 export type TComputedHandler<TState, R = any> = (
   state: TState,
-  keyMap: Record<keyof TState & string, boolean>,
   prevState: TState,
+  diff: Record<keyof TState & string, boolean>,
 ) => R;
 export type TWatch<TState extends Record<string, any>> = {
   keys: (keyof TState)[];

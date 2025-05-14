@@ -15,8 +15,7 @@ const { useSyncExternalStoreWithSelector } = useSyncExternalStoreExports;
 type TSubscribeFunc<
   TState extends Record<string, any> = Record<string, any>,
   TEffects extends Record<string, any> = Record<string, any>,
-  UserData extends Record<string, any> = Record<string, any>,
-> = (state: Model<TState, TEffects, UserData>, silent: boolean) => any;
+> = (state: Model<TState, TEffects>, silent: boolean) => any;
 
 type IEffects<M extends Model<any, any>> = Record<
   string,
@@ -26,36 +25,25 @@ type IEffects<M extends Model<any, any>> = Record<
 export interface IModelConfig<
   TState extends Record<string, any> = Record<string, any>,
   TEffects extends IEffects<Model<TState, TEffects>> = IEffects<Model>,
-  UserData extends Record<string, any> = Record<string, any>,
 > {
-  autoInit?: boolean;
   state: TState;
   effects?: Partial<TEffects>;
-  onStateChange?: (prevState: TState, currentState: TState) => any;
-  modifyState?: (
-    prevState: TState,
-    nextState: TState,
-  ) => Partial<TState> | null;
   watch?: TWatch<TState>;
   computed?: TComputed<TState>;
-  userData?: UserData;
-  name?: string;
 }
 export class Model<
   TState extends Record<string, any> = Record<string, any>,
   TEffects extends IEffects<Model<TState, TEffects>> = IEffects<
-    Model<TState, any, any>
+    Model<TState, any>
   >,
-  UserData extends Record<string, any> = Record<string, any>,
 > {
   isUnMount = false;
   name?: string;
   state: TState = {} as TState;
-  _userData: UserData = {} as UserData;
   _effects = {} as TEffects;
   _preState: TState = {} as TState;
   _dispatchSignal: string = '';
-  _subscribes: TSubscribeFunc<TState, TEffects, UserData>[] = [];
+  _subscribes: TSubscribeFunc<TState, TEffects>[] = [];
   asyncManagerMap: Record<
     string,
     AsyncManager<
@@ -70,23 +58,15 @@ export class Model<
     >
   > = {};
   _isInited = false;
-  constructor(public config: IModelConfig<TState, TEffects, UserData>) {
-    if (config.autoInit !== false) {
-      this.init();
-    }
-  }
+  constructor(public config: IModelConfig<TState, TEffects>) {}
   init() {
     if (!this._isInited) {
       this._isInited = true;
       const config = this.config;
       this.state = this.getActualState({} as TState, config.state || {});
       this._preState = { ...this.state };
-      this._userData = config?.userData || ({} as UserData);
       if (config.effects) {
         this.setEffects(config.effects);
-      }
-      if (config.name) {
-        this.name = config.name;
       }
     }
   }
@@ -133,50 +113,37 @@ export class Model<
     });
     return this.asyncManagerMap[name];
   }
-  subscribe(func: TSubscribeFunc<TState, TEffects, UserData>) {
+  subscribe(func: TSubscribeFunc<TState, TEffects>) {
     this._subscribes.push(func);
     return () => {
       this.unsubscribe(func);
     };
   }
-  unsubscribe(func: TSubscribeFunc<TState, TEffects, UserData>) {
+  unsubscribe(func: TSubscribeFunc<TState, TEffects>) {
     if (this._subscribes.length) {
       this._subscribes = this._subscribes.filter((fn) => fn !== func);
     }
-  }
-  getUserData() {
-    return { ...this._userData };
-  }
-  setUserData(userData: Partial<UserData>) {
-    Object.assign(this._userData, userData);
   }
   setState(
     state: Partial<TState> | ((state: TState) => Partial<TState>),
     options?: IDispatchOptions,
   ) {
+    if (!this._isInited) {
+      this.init();
+    }
     if (state) {
       if (typeof state === 'function') {
         this.state = this.getActualState(this._preState, state(this.state));
       } else {
         this.state = this.getActualState(this._preState, state);
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      this.config.onStateChange &&
-        this.config.onStateChange(this._preState, this.getState());
       this.dispatch(options);
       this._preState = { ...this.state };
     }
   }
   getActualState(prevState: TState, payload: Partial<TState>) {
     let nextState = { ...prevState, ...payload };
-    const { modifyState, watch, computed } = this.config || {};
-    let partialState;
-    if (modifyState) {
-      partialState = modifyState(prevState, nextState);
-      if (partialState && typeof partialState === 'object') {
-        Object.assign(nextState, partialState);
-      }
-    }
+    const { watch, computed } = this.config || {};
     // 处理计算属性
     nextState = calcComputedState<TState>({
       prevState,
@@ -192,6 +159,9 @@ export class Model<
     return nextState;
   }
   getState = () => {
+    if (!this._isInited) {
+      this.init();
+    }
     return this.state;
   };
   dispatch(options?: IDispatchOptions) {
@@ -258,10 +228,10 @@ export class Model<
     equalityFn?: TEqualityFn<TState>,
   ) => {
     return this.useSelector((prevState, nextState) => {
-      if (keys && shallowEqualKeys(prevState, nextState, keys)) {
-        return true;
+      if (equalityFn) {
+        return equalityFn(prevState, nextState);
       }
-      if (equalityFn && equalityFn(prevState, nextState)) {
+      if (keys && shallowEqualKeys(prevState, nextState, keys)) {
         return true;
       }
       return false;
@@ -288,10 +258,9 @@ export class Model<
 export function useModel<
   TState extends Record<string, any>,
   TEffects extends IEffects<Model<TState, TEffects>> = IEffects<Model<TState>>,
-  UserData extends Record<string, any> = Record<string, any>,
->(modelConfig: IModelConfig<TState, TEffects, UserData>) {
+>(modelConfig: IModelConfig<TState, TEffects>) {
   const model = useMemo(() => {
-    return new Model<TState, TEffects, UserData>(modelConfig);
+    return new Model<TState, TEffects>(modelConfig);
   }, []);
   model.config = modelConfig;
   if (modelConfig.effects) {
@@ -303,5 +272,5 @@ export function useModel<
       model.isUnMount = true;
     };
   }, [model]);
-  return model as Model<TState, TEffects, UserData>;
+  return model as Model<TState, TEffects>;
 }

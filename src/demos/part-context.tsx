@@ -1,8 +1,8 @@
 import type { CheckboxProps } from 'antd';
 import { Checkbox as BaseCheckbox } from 'antd';
-import { Model } from '@cm/r-store';
-import { useCreation } from '@cm/r-store/hooks';
-import { arrayToObj } from '@cm/r-store/utils';
+import { Model } from 'r-model-store';
+import { useCreation } from 'r-model-store/hooks';
+import { arrayToObj } from 'r-model-store/utils';
 import type { ReactNode } from 'react';
 import React, { createContext, useContext, useEffect, useMemo } from 'react';
 
@@ -28,7 +28,6 @@ export class CheckBoxGroupModel extends Model<CheckBoxGroupState> {
   props: CheckBoxGroupProps = {};
   constructor() {
     super({
-      autoInit: false,
       state: {
         value: [],
         valueMap: {},
@@ -53,7 +52,6 @@ export class CheckBoxGroupModel extends Model<CheckBoxGroupState> {
         },
       ],
     });
-    this.init();
   }
 
   getCheckAllInfo(checkMap?: Record<Key, boolean>) {

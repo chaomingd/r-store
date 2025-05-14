@@ -43,7 +43,7 @@ export function calcComputedState<TState extends Record<string, any>>({
           computedItem.keys,
         );
         if (diff) {
-          partialState = computedItem.handler(currentNextState, diffKeysMap, prevState);
+          partialState = computedItem.handler(currentNextState, prevState, diffKeysMap);
         }
       }
       if (partialState) {
@@ -76,7 +76,7 @@ export function execWatchHandler<TState extends Record<string, any>>({
         );
         if (diff) {
           // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          watchItem.handler && watchItem.handler(nextState, diffKeysMap, prevState);
+          watchItem.handler && watchItem.handler(nextState, prevState, diffKeysMap);
         }
       }
     });

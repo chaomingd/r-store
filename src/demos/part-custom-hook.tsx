@@ -1,4 +1,4 @@
-import { useModel } from '@cm/r-store';
+import { useModel } from 'r-model-store';
 import React from 'react';
 
 interface State {

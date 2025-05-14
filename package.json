@@ -1,7 +1,18 @@
 {
-  "name": "@cm/r-store",
-  "version": "0.0.1",
-  "description": "react store",
+  "name": "r-model-store",
+  "version": "0.0.2",
+  "description": "A simple and easy-to-use react state management library",
+  "keywords": [
+    "react",
+    "state management",
+    "store",
+    "react store",
+    "react state management",
+    "react state",
+    "react state store",
+    "react model",
+    "react-model-store"
+  ],
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

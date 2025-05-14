@@ -1,10 +1,12 @@
 ---
 hero:
-  title: React Store
+  title: React Model Store
   description: A simple and easy-to-use react state management library
   actions:
-    - text: 指南
+    - text: Guide
       link: /guides
+    - text: API Doc
+      link: /api
 ---
 
 r-store

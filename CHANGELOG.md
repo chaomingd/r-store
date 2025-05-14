@@ -1,6 +1,6 @@
-# @cm/r-store
+# r-model-store
 
-## 0.0.1
+## 0.0.2
 
 ### Patch Changes
 

@@ -18,10 +18,11 @@ export default defineConfig({
   favicons: [publicPath + 'logo-fill-64x64.png'],
   themeConfig: {
     logo: publicPath + 'logo-fill_100.png',
-    name: 'r-store',
+    name: 'React Model Store',
     nav: {
-      'zh-CN': [{ title: '指南', link: '/guides' }],
-      'en-US': [{ title: 'Guide', link: '/en-US/guides' }],
+      'zh-CN': [{ title: '指南', link: '/guides' }, { title: 'API 文档', link: '/api' }],
+      'en-US': [{ title: 'Guide', link: '/en-US/guides' }, { title: 'API Doc', link: '/en-US/api' }],
     },
+    showLineNum: true,
   },
 });
