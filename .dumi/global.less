@@ -8,3 +8,29 @@ h1.dumi-default-hero-title {
 a.dumi-default-logo {
   font-size: 16px;
 }
+
+div.dumi-default-sidebar {
+  padding-inline-end: 5px;
+  width: 220px;
+  @media only screen and (max-width: 767px) {
+    width: 250px;
+  }
+}
+
+/* scroll bar styles */
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .2);
+  border-color: rgba(255,255,255, 1);
+  border-radius: 9999px;
+  border-width: 1px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 9999px;
+}

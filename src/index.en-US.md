@@ -1,63 +1,61 @@
 # Store
 
-## 安装
+## Installation
 
 ```bash | pure
 npm install r-model-store
 ```
 
-## 介绍
+## Introduction
 
-`r-model-store` 是一个轻量级、功能强大的 React 状态管理库，旨在通过面向对象和发布订阅的设计模式简化状态管理。它提供了直观的 API 和灵活的扩展能力，适合全局、页面级和组件级的状态管理场景。
+`r-model-store` is a lightweight and powerful React state management library designed to simplify state management through object-oriented and publish-subscribe design patterns. It provides an intuitive API and flexible extensibility, suitable for global, page-level, and component-level state management scenarios.
 
-### 核心特性
+### Core Features
 
-- 面向对象的设计
-  通过创建Model实例或继承 Model 类，开发者可以轻松定义状态和操作逻辑，代码结构清晰，易于维护。
-- 精准组件更新
-  提供 useGetState 方法，支持按需订阅状态字段，避免不必要的组件重渲染。
-- 内置`computed`、`watch`功能
-  `computed` 提供了对状态的派生计算能力，支持基于现有状态生成新的状态值，避免重复逻辑。
-  `watch` 提供了对状态变化的监听能力，支持在状态发生变化时执行特定的回调逻辑，便于处理副作用。
-- 异步处理
-  通过asyncManager支持对异步竞态问题的处理，失败重试的功能.
-- 灵活的扩展能力
-  通过继承Model类的面向对象的方式灵活编写代码
-- 与 React 无缝集成
-  提供直观的 API，降低学习成本，快速上手。
+- **Object-Oriented Design**\
+  Developers can easily define states and logic by creating Model instances or extending the Model class, resulting in clear and maintainable code structures.
+- **Precise Component Updates**\
+  The `useGetState` method supports selective state field subscriptions, avoiding unnecessary component re-renders.
+- **Built-in `computed` and `watch` Features**\
+  `computed` enables derived state calculations, generating new state values based on existing ones, avoiding repetitive logic.\
+  `watch` allows monitoring state changes and executing specific callback logic when changes occur, making it easier to handle side effects.
+- **Asynchronous Handling**\
+  Supports handling asynchronous race conditions and retrying failed operations through `asyncManager`.
+- **Flexible Extensibility**\
+  Enables flexible code writing by extending the Model class in an object-oriented manner.
+- **Seamless Integration with React**\
+  Provides an intuitive API, reducing the learning curve and enabling quick adoption.
 
+## As Global State
 
-## 作为全局状态
-
-### 基本使用
+### Basic Usage
 
 <code src="./demos/overall-basic.tsx"></code>
 :::info
-modelInstance.setState： 用来更新状态值，只需传入部分状态值，自动合并，功能类似 class 组件的 setState
-</br>
-modelInstance.getState： 用来获取最新的状态值，与 react 渲染时机无关，任何时候获取的都是最新的值
+`modelInstance.setState`: Updates state values by passing partial state values, automatically merging them, similar to the `setState` method in class components.\
+`modelInstance.getState`: Retrieves the latest state values, independent of React's rendering timing, always returning the most up-to-date values.
 :::
 
-### 多个状态组合
+### Combining Multiple States
 
 <code src="./demos/overall-multi-state.tsx"></code>
 
-### 取出多个值
+### Extracting Multiple Values
 
 <code src="./demos/overall-multi-value.tsx"></code>
 
-### Computed 计算值
+### Computed Values
 
 <code src="./demos/overall-computed-value.tsx"></code>
 
-## 作为局部状态
+## As Local State
 
-### 基本使用
+### Basic Usage
 
-#### 配合 useCreation 的自定义 hook 使用，
+#### Using a Custom Hook with `useCreation`
 
 :::info
-useCreation 自定义 hook 的核心原理 (初始化一次)
+The core principle of the `useCreation` custom hook (initialized once):
 
 ```tsx | pure
 import { useRef } from 'react';
@@ -71,37 +69,35 @@ function useCreation<Fn extends (...args: any[]) => any>(fn: Fn) {
 }
 ```
 
-这里为例方便直接使用 ahooks 中的 useCreation，内部原理基本和上面的一致
+For convenience, you can directly use the `useCreation` hook from `ahooks`, which has a similar internal implementation.
 :::
 
 <code src="./demos/part-basic.tsx"></code>
 
-#### 使用自定义工具 hook，useModel
+#### Using a Custom Utility Hook, `useModel`
 
 <code src="./demos/part-custom-hook.tsx"></code>
 :::info
-useModel 实际上就是对上述例子中 useCreation 和 实例化 Model 过程的封装
+`useModel` is essentially a wrapper around the `useCreation` and Model instantiation process from the previous example.
 :::
 
-### 组件的受控于非受控模式
+### Controlled and Uncontrolled Modes in Components
 
-受控模式是指组件的状态由用户控制，一般通过 props 传入值控制 UI 的显示，非受控模式是指，组件的状态由组件内部管理，外部无法更改。
-一般来说对于基础组件，既要支持受控模式，也要支持非受控模式。下面以 Input 组件为例
+Controlled mode refers to components whose state is managed externally, typically via props, while uncontrolled mode refers to components managing their own state internally. For example, an Input component can support both modes:
 <code src="./demos/part-mode.tsx"></code>
 
-### 配合 Context 使用
+### Using with Context
 
 <code src="./demos/part-context.tsx"></code>
 
-## 进阶用法
+## Advanced Usage
 
-### 处理请求竞态问题
+### Handling Request Race Conditions
 
-竞态问题指的是，当我们在交互过程中，由于各种原因导致同一个接口短时间之内连续发送请求，后发送的请求有可能先得到请求结果，从而导致数据渲染出现预期之外的错误。
-最典型的场景是输入框搜索功能，容易引发竞态问题，如下面的例子
+Race conditions occur when multiple requests to the same endpoint are sent in a short period, and the response order does not match the request order, leading to unexpected data rendering. A typical scenario is a search input field:
 <code src="./demos/part-question.tsx"></code>
 
-#### 使用 AsyncManger 处理请求竞态问题
+#### Using `AsyncManager` to Handle Request Race Conditions
 
 <code src="./demos/part-resolve-question.tsx"></code>
 :::info
@@ -116,35 +112,34 @@ asyncManager(name: string, options: {
     retryInterval?: number;
   }
 }).exec(fn)
-name: 唯一标识，不重复即可
+name: A unique identifier.
 options:
-- loadingKey: loading状态的key值 -> this.setState()
-- errorKey: 当发生错误时设置的error的key值 -> this.setState({error: error})
-- showLoading?: 是否启用loading, 设置为false则不会更改loading值;
+- loadingKey: Key for the loading state -> `this.setState()`.
+- errorKey: Key for the error state when an error occurs -> `this.setState({error: error})`.
+- showLoading: Whether to enable loading; set to `false` to avoid changing the loading state.
 - config:
-  - retryCount: fn 方法出错是重试的次数
-  - retryInterval 重试的时间间隔(ms)，默认 300ms
+  - retryCount: Number of retries for the `fn` method in case of errors.
+  - retryInterval: Time interval (ms) between retries, default is 300ms.
 ```
 
 :::
 
-### 处理请求重试
+### Handling Request Retries
 
 <code src="./demos/up-request-retry.tsx"></code>
 
-### immer 状态更新
+### Updating State with `immer`
 
-配合 immer.js 更新状态
+Use `immer.js` for state updates:
 <code src="./demos/up-immer.tsx"></code>
 
-## 最佳实践
+## Best Practices
 
-我们知道当前状态管理库是基础Model这个类实现的，类的用法很灵活，那么如何使用才是最佳实践呢，
-这里给出一些参考。
+The current state management library is based on the `Model` class, which is highly flexible. Below are some best practices for its usage.
 
-### 全局状态管理
+### Global State Management
 
-全局状态可根据功能拆分成多个Store，我们可以将多个Store通过一个类充当容器组合起来使用
+Global states can be divided into multiple stores based on functionality. These stores can be combined into a container class for usage:
 
 ```tsx | pure
 // stores/store1.ts
@@ -160,7 +155,7 @@ class Store1 extends Model<State1> {
   }
   someFunc() {
     this.setState({....})
-    console.log(this.store.store1) // 可以使用this.store访问其他store
+    console.log(this.store.store1) // Access other stores via `this.store`.
   }
 }
 // stores/store2.ts
@@ -173,7 +168,7 @@ class Store2 extends Model<State2> {
   }
   someFunc() {
     this.setState({....})
-    console.log(this.store.store1) // 可以使用this.store访问其他store
+    console.log(this.store.store1) // Access other stores via `this.store`.
   }
 }
 
@@ -189,10 +184,10 @@ class Store {
   }
 }
 
-expot const store = new Store(); // 在组件外部初始化，组件使用时，直接导入使用
+export const store = new Store(); // Initialize outside components and import for usage.
 
 
-// 在组件中使用
+// In a component
 import { store } from '/path/stores'
 const Comp1 = () => {
   const { store1 } = store
@@ -214,9 +209,9 @@ const Comp2 = () => {
 }
 ```
 
-### 页面级状态管理
+### Page-Level State Management
 
-页面级的状态可根据组件或功能拆分成多个Store，同样也使用类作为容器组合所有Store，并配合Context 使用
+Page-level states can also be divided into multiple stores based on components or functionality. Use a container class to combine all stores and integrate with Context:
 
 ```tsx | pure
 // stores/store1.ts
@@ -232,7 +227,7 @@ class Store1 extends Model<State1> {
   }
   someFunc() {
     this.setState({....})
-    console.log(this.store.store1) // 可以使用this.store访问其他store
+    console.log(this.store.store1) // Access other stores via `this.store`.
   }
 }
 // stores/store2.ts
@@ -245,7 +240,7 @@ class Store2 extends Model<State2> {
   }
   someFunc() {
     this.setState({....})
-    console.log(this.store.store1) // 可以使用this.store访问其他store
+    console.log(this.store.store1) // Access other stores via `this.store`.
   }
 }
 
@@ -265,17 +260,17 @@ export class Store {
 const StoreContext = createContext<Store | null>(null);
 
 export function StoreProvider({children}: {children: ReactNode | ReactNode[]}) {
-  const routeParams = useRouteParams().id // 动态路由(/path/:id)的id
+  const routeParams = useRouteParams().id // Dynamic route (/path/:id) id.
   const store = useMemo(() => {
-    return new Store(id); // 运行时根据id创建一次
-  }, [id]) // 根据id不同创建不同的store实例，如此根据id不同就能重置所有状态值
+    return new Store(id); // Create once at runtime based on id.
+  }, [id]) // Create different store instances based on id to reset all state values.
  
   // const store = useMemo(() => {
   //   return new Store(id);
-  // }, []) // 或者仅初始化一次 通过useEffect监听id的变化来重置某些状态，或重新加载数据
+  // }, []) // Or initialize once and reset certain states or reload data via useEffect when id changes.
   // store.id = id;
   // useEffect(() => {
-  //   store.someResetStateFunc(); // 根据id重置某些状态，或重新加载数据
+  //   store.someResetStateFunc(); // Reset certain states or reload data based on id.
   // }, [id])
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
@@ -324,13 +319,12 @@ const Comp2 = () => {
 export default Comp2;
 ```
 
-### 组件级状态管理
+### Component-Level State Management
 
-#### 简单组件
+#### Simple Components
 
-对于简单(状态简单)组件，可使用useModel或者直接使用原生useState即可
+For simple components (with simple states), you can use `useModel` or the native `useState`.
 
-#### 复杂组件
+#### Complex Components
 
-对于状态复杂的组件，如CheckBoxGroup这类可以跨层级使用的组件，可以配合Context使用
-参考[局部状态配合Context使用章节](#配合-context-使用)
+For complex components, such as a CheckBoxGroup that spans multiple levels, you can use Context. Refer to the [Using with Context](#using-with-context) section for details.

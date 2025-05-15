@@ -2,7 +2,7 @@
 
 ## Model
 
-创建 Model 实例即可管理 react 状态
+Create a Model instance to manage React state.
 
 ```tsx | pure
 interface State {
@@ -10,12 +10,12 @@ interface State {
 }
 const store = new Model<State>(modelConfig);
 
-// 或者使用继承
+// Or use inheritance
 class Store extends Model<state> {
   constructor() {
     super(modelConfig)
   }
-  somFunc() {
+  someFunc() {
     this.setState({...})
   }
 }
@@ -24,12 +24,12 @@ const store = new Store();
 
 ### ModelConfig
 
-属性
+Properties:
 
-- `state` 默认状态值，类型必须和传入的 State 类型一致
-- `computed` 计算值声明。参考[Computed](#computed)
-- `watch` 字段变化监听声明。参考[Watch](#watch)
-- `effects` 函数声明。参考[Effects](#effects)
+- `state`: Default state value, the type must match the State type.
+- `computed`: Declaration of computed values. See [Computed](#computed).
+- `watch`: Declaration of field change listeners. See [Watch](#watch).
+- `effects`: Declaration of functions. See [Effects](#effects).
 
 ### Computed
 
@@ -53,17 +53,16 @@ type ComputedConfig = {
   ) => Partial<State>)
 ```
 
-- `keys: string[]` 需要监听的 keys，当 keys 所对应的值变化时重新执行 handler
-- `handler: (newState: State, prevState: State, diff: Record<string, boolean>) => Partial<State>`
-  处理函数，当 keys 所对应的值变化时重新执行，可以返回新的状态。
+- `keys: string[]`: Keys to watch. When the values corresponding to the keys change, the handler is re-executed.
+- `handler: (newState: State, prevState: State, diff: Record<string, boolean>) => Partial<State>`: The handler function, re-executed when the values corresponding to the keys change, can return a new state.
 
-##### 参数
+##### Parameters
 
-- `newState` 最新的状态值
-- `prevState` 上一次的状态值
-- `diff` 更新的状态值，如传入`keys: ['age', 'gender']` 当只有`age`变化时 `diff: {age: true, gender: false}`
+- `newState`: The latest state value.
+- `prevState`: The previous state value.
+- `diff`: The updated state values. For example, if `keys: ['age', 'gender']` is passed and only `age` changes, `diff: {age: true, gender: false}`.
 
-#### 使用
+#### Usage
 
 ```tsx | pure
 interface CounterState {
@@ -86,8 +85,8 @@ class Counter extends Model<CounterState> {
             };
           },
         },
-        // 或者
-        // 传入函数时，只要有状态发生变化都会重新执行，一般不会使用这种方式，除非你需要定制computed
+        // Or
+        // When passing a function, it will re-execute whenever any state changes. This is generally not used unless you need custom computed behavior.
         (state) => {
           return {
             doubleCount: count * 2,
@@ -103,7 +102,7 @@ class Counter extends Model<CounterState> {
         count: count + 1,
       };
     });
-    // 或者
+    // Or
     this.setState(this.getState().count + 1);
   }
 }
@@ -111,11 +110,11 @@ class Counter extends Model<CounterState> {
 
 ### Watch
 
-Watch 的用法和 Computed 一致，只不过 handler 中无需返回值即可
+The usage of Watch is the same as Computed, except that the handler does not need to return a value.
 
 ### Effects
 
-仅仅作为函数使用，跟普通函数没有区别，只是将函数和 model 放在一起方便使用
+Used as functions, no different from regular functions, but grouped with the model for convenience.
 
 ```tsx | pure
 interface Effects {
@@ -125,15 +124,15 @@ interface Effects {
 
 ## Prototype Function
 
-Model 的原型方法
+Prototype methods of the Model.
 
 ### getState
 
-获取最新的状态值
+Get the latest state value.
 
 ### setState
 
-更新状态值
+Update the state value.
 
 ```tsx | pure
 setState(
@@ -142,10 +141,10 @@ setState(
 ): void;
 
 interface IDispatchOptions {
-  silient?: boolean; // silient 为true值，仅更新状态值，但不会引起组件重新渲染
+  silient?: boolean; // If silient is true, only the state value is updated without causing the component to re-render.
 }
 
-// 用法
+// Usage
 this.setState({...})
 this.setState((state) => ({...}))
 this.setState({...}, {silent: true})
@@ -153,8 +152,7 @@ this.setState({...}, {silent: true})
 
 ### useGetState
 
-在组件中使用状态值并和组件关联，必须调用该函数，这样当状态更新时组件才会重新渲染
-该函数基于 useSelector 实现
+Use state values in a component and associate them with the component. This function must be called so that the component re-renders when the state updates. It is implemented based on `useSelector`.
 
 ```tsx | pure
 useGetState<Key extends keyof TState & string>(
@@ -163,12 +161,12 @@ useGetState<Key extends keyof TState & string>(
 )
 ```
 
-- `keys` 使用 `keys` 进行优化，只有当`keys`对应的值变化时组件才会更新，当不传入 keys 时状态任意值变化都会引起组件更新。建议都应该传入`keys`
-- `equalityFn` 自定义比较函数，返回布尔值。`true`不更新组件。
+- `keys`: Use `keys` for optimization. The component updates only when the values corresponding to the `keys` change. If no keys are passed, any state change will trigger a component update. It is recommended to always pass `keys`.
+- `equalityFn`: Custom comparison function that returns a boolean. `true` means the component will not update.
 
 ### useSelector
 
-使用该函数订阅状态字段的更新，需要自定义比较函数。
+Use this function to subscribe to updates of state fields, with a custom comparison function.
 
 ```tsx | pure
 useSelector(
@@ -176,16 +174,15 @@ useSelector(
 ): State;
 ```
 
-#### 参数
+#### Parameters
 
-- `equalityFn` _(可选)_  
-  自定义比较函数，用于比较前后两次提取的值是否相等。如果返回 `true`，组件不会重新渲染。默认使用浅比较。
+- `equalityFn` _(optional)_: Custom comparison function to compare the extracted values before and after. If it returns `true`, the component will not re-render. Defaults to shallow comparison.
 
-#### 返回值
+#### Return Value
 
-- 返回整个状态值。之所以返回整个状态值，是为了避免复制部分状态的开销。
+- Returns the entire state value. This avoids the overhead of copying partial state.
 
-#### 实例
+#### Example
 
 ```tsx
 import React from 'react';
@@ -198,7 +195,7 @@ const store = new Model({
   },
 });
 const MyComponent = () => {
-  // 只有当age变化时才会更新组件
+  // The component updates only when age changes.
   const { age } = store.useSelector((prevState, nextState) =>
     Object.is(prevState.age, nextState.age),
   );
@@ -209,32 +206,32 @@ const MyComponent = () => {
 
 ### subscribe
 
-订阅状态值的变化
+Subscribe to state value changes.
 
 ```tsx | pure
-// type define
+// Type definition
 subscribe(func): Unsubcribe;
 
 const unsubscribe = store.subscribe((store, isSilent) => {
   console.log(store.getState())
 })
 
-// remove subscribe
+// Remove subscription
 unsubscribe();
 ```
 
 ### subscribeWithKeys
 
-订阅状态值的变化， 当传入的 keys 所对应的状态值变化时触发函数
+Subscribe to state value changes. The function is triggered when the state values corresponding to the passed keys change.
 
 ```tsx | pure
-// type define
+// Type definition
 subscribeWithKeys(
   func: TSubscribeFunc<TState, TEffects>,
   options: { keys?: Key[]; equalityFn?: TEqualityFn<TState> },
 )
 
-// usage
+// Usage
 store.subscribeWithKeys((store, isSilent) => {
   console.log(store.getState().age)
 }, {keys: ['age']})
@@ -242,10 +239,10 @@ store.subscribeWithKeys((store, isSilent) => {
 
 ### asyncManager
 
-使用 asyncManger 处理异步任务，支持处理竞态问题，失败重试等
+Use `asyncManager` to handle asynchronous tasks, supporting race condition handling, retry on failure, etc.
 
 ```tsx | pure
-// type define
+// Type definition
 asyncManager(
   name: string,
   options?: {
@@ -256,23 +253,23 @@ asyncManager(
   },
 ): AsyncManager
 
-// AsyncManager define
+// AsyncManager definition
 class AsyncManager {
   ...
   exec(func: () => Promise<any>): Promise<any>
 }
 ```
 
-- `name` 在当前 store 中不重复即可
-- `options`
-  - `loadingKey` loading 状态值的 key `default: 'loading'`。 `this.setState({[loadingKey]: true})`
-  - `errorKey` error 状态值的 key `default: 'error'`。`this.setState({[errorKey]: err})`
-  - `config`
-    - `retryCount` 重试的次数
-    - `retryInterval` 重试的时间间隔，单位 ms
-  - `showLoading` 是否更新 loading 状态值
+- `name`: Must be unique within the current store.
+- `options`:
+  - `loadingKey`: Key for the loading state. Default: `'loading'`. `this.setState({[loadingKey]: true})`.
+  - `errorKey`: Key for the error state. Default: `'error'`. `this.setState({[errorKey]: err})`.
+  - `config`:
+    - `retryCount`: Number of retries.
+    - `retryInterval`: Retry interval in milliseconds.
+  - `showLoading`: Whether to update the loading state.
 
-#### 用法
+#### Usage
 
 ```tsx | pure
 interface StoreState {
@@ -291,7 +288,7 @@ class Store extends Model<StoreState> {
   }
 
   fetchData() {
-    // 自动更新loading,error状态值，无需手动调用`this.setState({loading: true})`
+    // Automatically updates loading and error state values. No need to manually call `this.setState({loading: true})`.
     return this.asyncManager('fetchData', {
       loadingKey: 'loading',
       errorKey: 'error',
@@ -301,7 +298,7 @@ class Store extends Model<StoreState> {
       }
     }).exec(() => {
       return Promise.resolve({
-        userInfo: { // userInfo 会自动更新到状态中，无需手动调用`this.setState({userInfo: {....}})`
+        userInfo: { // userInfo will automatically update in the state. No need to manually call `this.setState({userInfo: {....}})`.
           name: 'jack';
           id: 'jack';
           nickName: 'jack_nickName';
@@ -314,26 +311,26 @@ class Store extends Model<StoreState> {
 
 ### dispatch
 
-执行所有订阅函数
+Execute all subscription functions.
 
 ```tsx | pure
-// type define
+// Type definition
 interface IDispatchOptions {
   silent: boolean;
 }
 dispatch(options?: IDispatchOptions)
 
 
-// usage
+// Usage
 store.dispatch();
 ```
 
 ## useModel
 
-以工厂的设计模式创建 Model，只能用于函数式组件
+Create a Model using the factory design pattern. Can only be used in functional components.
 
 ```tsx | pure
 const store = useModel(modelConfig);
 ```
 
-modelConfig 参考 [ModelConfig](#modelconfig)
+`modelConfig` reference: [ModelConfig](#modelconfig)

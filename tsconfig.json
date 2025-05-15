@@ -12,5 +12,5 @@
       "r-model-store/*": ["src/*", "*"]
     }
   },
-  "include": [".dumirc.ts", "src/**/*"]
+  "include": [".dumirc.ts", "src/**/*", ".dumi/app.tsx"]
 }
