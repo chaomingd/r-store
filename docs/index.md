@@ -1,7 +1,7 @@
 ---
 hero:
   title: React Model Store
-  description: 简单易用的react状态管理库
+  description: 一个轻量级、功能强大的 React 状态管理库，旨在通过面向对象和发布订阅的设计模式简化状态管理。它提供了直观的 API 和灵活的扩展能力，适合全局、页面级和组件级的状态管理场景。
   actions:
     - text: 指南
       link: /guides

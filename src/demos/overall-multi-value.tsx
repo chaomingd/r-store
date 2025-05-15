@@ -6,8 +6,6 @@ type State = {
   lastName: string;
 };
 
-
-
 // 2. 继承Model
 class PersonStore extends Model<State> {
   constructor() {
@@ -34,20 +32,13 @@ class PersonStore extends Model<State> {
 
 const personStore = new PersonStore();
 
-// In consuming app
-export default function App() {
+const FirstName = () => {
   // useGetState 传入一个数组，数组的元素是需要监听的 state 的 key
   // 只有当监听的 key的值 发生变化时，组件才会重新渲染
-  const { firstName } = personStore.useGetState([
-    'firstName',
-    'lastName',
-  ]);
+  const { firstName } = personStore.useGetState(['firstName']);
+  console.log('render firstName', firstName);
   return (
-    <main
-      style={{
-        color: '#000',
-      }}
-    >
+    <div>
       <label>
         First name
         <input
@@ -60,6 +51,43 @@ export default function App() {
       <p>
         Hello, <strong>{firstName}!</strong>
       </p>
+    </div>
+  );
+};
+
+const LastName = () => {
+  // useGetState 传入一个数组，数组的元素是需要监听的 state 的 key
+  // 只有当监听的 key的值 发生变化时，组件才会重新渲染
+  const { lastName } = personStore.useGetState(['lastName']);
+  console.log('render lastName', lastName);
+  return (
+    <div>
+      <label>
+        Last name
+        <input
+          // Update the "lastName" state
+          onChange={(e) => personStore.updateLastName(e.currentTarget.value)}
+          value={lastName}
+        />
+      </label>
+
+      <p>
+        Hello, <strong>{lastName}!</strong>
+      </p>
+    </div>
+  );
+}
+
+// In consuming app
+export default function App() {
+  return (
+    <main
+      style={{
+        color: '#000',
+      }}
+    >
+      <FirstName />
+      <LastName />
     </main>
   );
 }

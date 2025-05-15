@@ -154,6 +154,7 @@ this.setState({...}, {silent: true})
 ### useGetState
 
 在组件中使用状态值并和组件关联，必须调用该函数，这样当状态更新时组件才会重新渲染
+该函数基于 useSelector 实现
 
 ```tsx | pure
 useGetState<Key extends keyof TState & string>(
@@ -164,6 +165,47 @@ useGetState<Key extends keyof TState & string>(
 
 - `keys` 使用 `keys` 进行优化，只有当`keys`对应的值变化时组件才会更新，当不传入 keys 时状态任意值变化都会引起组件更新。建议都应该传入`keys`
 - `equalityFn` 自定义比较函数，返回布尔值。`true`不更新组件。
+
+### useSelector
+
+使用该函数订阅状态字段的更新，需要自定义比较函数。
+
+```tsx | pure
+useSelector(
+  equalityFn?: (prev: State, next: State) => boolean,
+): State;
+```
+
+#### 参数
+
+- `equalityFn` _(可选)_  
+  自定义比较函数，用于比较前后两次提取的值是否相等。如果返回 `true`，组件不会重新渲染。默认使用浅比较。
+
+#### 返回值
+
+- 返回整个状态值。之所以返回整个状态值，是为了避免复制部分状态的开销。
+
+#### 实例
+
+```tsx
+import React from 'react';
+import { Model } from 'r-model-store';
+
+const store = new Model({
+  state: {
+    age: 18,
+    gender: 0,
+  },
+});
+const MyComponent = () => {
+  // 只有当age变化时才会更新组件
+  const { age } = store.useSelector((prevState, nextState) =>
+    Object.is(prevState.age, nextState.age),
+  );
+
+  return <div>{age}</div>;
+};
+```
 
 ### subscribe
 
