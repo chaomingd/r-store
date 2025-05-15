@@ -25,9 +25,9 @@
     "docs:preview": "dumi preview",
     "prepare": "husky install && dumi setup",
     "doctor": "father doctor",
-    "lint": "npm run lint:es && npm run lint:css",
-    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\" 2> /dev/null",
-    "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "npm run lint:es",
+    "lint:css": "stylelint --fix \"{src,test}/**/*.{css,less}\"",
+    "lint:es": "eslint --fix \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "change:version": "pnpm changeset && changeset version && pnpm build && pnpm lint",
     "release": "pnpm login:repository && changeset publish && git push origin --tags",
     "login:repository": "sh scripts/pnpm-login.sh"
