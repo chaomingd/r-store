@@ -1,20 +1,4 @@
-(self.webpackChunkr_model_store=self.webpackChunkr_model_store||[]).push([[904],{60568:function(t,n,e){"use strict";var a;e.r(n),e.d(n,{demos:function(){return v}});var d=e(90228),u=e.n(d),c=e(87999),p=e.n(c),m=e(75271),b=e(61203),S=e(49900),v={"docs-api-demo-0":{component:m.memo(m.lazy(p()(u()().mark(function i(){var I,r,s,l,f,o;return u()().wrap(function(x){for(;;)switch(x.prev=x.next){case 0:return x.next=2,Promise.resolve().then(e.t.bind(e,75271,19));case 2:return I=x.sent,r=I.default,x.next=6,Promise.resolve().then(e.bind(e,49900));case 6:s=x.sent,l=s.Model,f=new l({state:{age:18,gender:0}}),o=function(){var g=f.useSelector(function(E,_){return Object.is(E.age,_.age)}),h=g.age;return r.createElement("div",null,h)};case 10:case"end":return x.stop()}},i)})))),asset:{type:"BLOCK",id:"docs-api-demo-0",refAtomIds:[],dependencies:{"index.tsx":{type:"FILE",value:`import React from 'react';
-import { Model } from 'r-model-store';
-
-const store = new Model({
-  state: {
-    age: 18,
-    gender: 0,
-  },
-});
-const MyComponent = () => {
-  // \u53EA\u6709\u5F53age\u53D8\u5316\u65F6\u624D\u4F1A\u66F4\u65B0\u7EC4\u4EF6
-  const { age } = store.useSelector((prevState, nextState) =>
-    Object.is(prevState.age, nextState.age),
-  );
-
-  return <div>{age}</div>;
-};`},react:{type:"NPM",value:"18.3.1"},"r-model-store":{type:"NPM",value:"0.0.4"}},entry:"index.tsx"},context:{react:a||(a=e.t(m,2)),"r-model-store":S},renderOpts:{compile:function(){var i=p()(u()().mark(function r(){var s,l=arguments;return u()().wrap(function(o){for(;;)switch(o.prev=o.next){case 0:return o.next=2,e.e(978).then(e.bind(e,65978));case 2:return o.abrupt("return",(s=o.sent).default.apply(s,l));case 3:case"end":return o.stop()}},r)}));function I(){return i.apply(this,arguments)}return I}()}}}},53028:function(t,n,e){"use strict";e.r(n),e.d(n,{demos:function(){return u}});var a=e(75271),d=e(79493),u={}},5051:function(t,n,e){"use strict";e.r(n),e.d(n,{texts:function(){return d}});var a=e(61203);const d=[{value:"\u521B\u5EFA Model \u5B9E\u4F8B\u5373\u53EF\u7BA1\u7406 react \u72B6\u6001",paraId:0,tocIndex:1},{value:`interface State {
+"use strict";(self.webpackChunkr_model_store=self.webpackChunkr_model_store||[]).push([[904],{60568:function(a,n,e){e.r(n),e.d(n,{demos:function(){return o}});var r=e(75271),t=e(61203),o={}},53028:function(a,n,e){e.r(n),e.d(n,{demos:function(){return o}});var r=e(75271),t=e(79493),o={}},5051:function(a,n,e){e.r(n),e.d(n,{texts:function(){return t}});var r=e(61203);const t=[{value:"\u521B\u5EFA Model \u5B9E\u4F8B\u5373\u53EF\u7BA1\u7406 react \u72B6\u6001",paraId:0,tocIndex:1},{value:`interface State {
   ....
 }
 const store = new Model<State>(modelConfig);
@@ -108,7 +92,24 @@ this.setState({...}, {silent: true})
   equalityFn?: (prev: State, next: State) => boolean,
 ): State;
 `,paraId:23,tocIndex:13},{value:"equalityFn",paraId:24,tocIndex:14},{value:" ",paraId:24,tocIndex:14},{value:"(\u53EF\u9009)",paraId:24,tocIndex:14},{value:`
-\u81EA\u5B9A\u4E49\u6BD4\u8F83\u51FD\u6570\uFF0C\u7528\u4E8E\u6BD4\u8F83\u524D\u540E\u4E24\u6B21\u63D0\u53D6\u7684\u503C\u662F\u5426\u76F8\u7B49\u3002\u5982\u679C\u8FD4\u56DE `,paraId:24,tocIndex:14},{value:"true",paraId:24,tocIndex:14},{value:"\uFF0C\u7EC4\u4EF6\u4E0D\u4F1A\u91CD\u65B0\u6E32\u67D3\u3002\u9ED8\u8BA4\u4F7F\u7528\u6D45\u6BD4\u8F83\u3002",paraId:24,tocIndex:14},{value:"\u8FD4\u56DE\u6574\u4E2A\u72B6\u6001\u503C\u3002\u4E4B\u6240\u4EE5\u8FD4\u56DE\u6574\u4E2A\u72B6\u6001\u503C\uFF0C\u662F\u4E3A\u4E86\u907F\u514D\u590D\u5236\u90E8\u5206\u72B6\u6001\u7684\u5F00\u9500\u3002",paraId:25,tocIndex:15},{value:"\u8BA2\u9605\u72B6\u6001\u503C\u7684\u53D8\u5316",paraId:26,tocIndex:17},{value:`// type define
+\u81EA\u5B9A\u4E49\u6BD4\u8F83\u51FD\u6570\uFF0C\u7528\u4E8E\u6BD4\u8F83\u524D\u540E\u4E24\u6B21\u63D0\u53D6\u7684\u503C\u662F\u5426\u76F8\u7B49\u3002\u5982\u679C\u8FD4\u56DE `,paraId:24,tocIndex:14},{value:"true",paraId:24,tocIndex:14},{value:"\uFF0C\u7EC4\u4EF6\u4E0D\u4F1A\u91CD\u65B0\u6E32\u67D3\u3002\u9ED8\u8BA4\u4F7F\u7528\u6D45\u6BD4\u8F83\u3002",paraId:24,tocIndex:14},{value:"\u8FD4\u56DE\u6574\u4E2A\u72B6\u6001\u503C\u3002\u4E4B\u6240\u4EE5\u8FD4\u56DE\u6574\u4E2A\u72B6\u6001\u503C\uFF0C\u662F\u4E3A\u4E86\u907F\u514D\u590D\u5236\u90E8\u5206\u72B6\u6001\u7684\u5F00\u9500\u3002",paraId:25,tocIndex:15},{value:`import React from 'react';
+import { Model } from 'r-model-store';
+
+const store = new Model({
+  state: {
+    age: 18,
+    gender: 0,
+  },
+});
+const MyComponent = () => {
+  // \u53EA\u6709\u5F53age\u53D8\u5316\u65F6\u624D\u4F1A\u66F4\u65B0\u7EC4\u4EF6
+  const { age } = store.useSelector((prevState, nextState) =>
+    Object.is(prevState.age, nextState.age),
+  );
+
+  return <div>{age}</div>;
+};
+`,paraId:26,tocIndex:16},{value:"\u8BA2\u9605\u72B6\u6001\u503C\u7684\u53D8\u5316",paraId:27,tocIndex:17},{value:`// type define
 subscribe(func): Unsubcribe;
 
 const unsubscribe = store.subscribe((store, isSilent) => {
@@ -117,7 +118,7 @@ const unsubscribe = store.subscribe((store, isSilent) => {
 
 // remove subscribe
 unsubscribe();
-`,paraId:27,tocIndex:17},{value:"\u8BA2\u9605\u72B6\u6001\u503C\u7684\u53D8\u5316\uFF0C \u5F53\u4F20\u5165\u7684 keys \u6240\u5BF9\u5E94\u7684\u72B6\u6001\u503C\u53D8\u5316\u65F6\u89E6\u53D1\u51FD\u6570",paraId:28,tocIndex:18},{value:`// type define
+`,paraId:28,tocIndex:17},{value:"\u8BA2\u9605\u72B6\u6001\u503C\u7684\u53D8\u5316\uFF0C \u5F53\u4F20\u5165\u7684 keys \u6240\u5BF9\u5E94\u7684\u72B6\u6001\u503C\u53D8\u5316\u65F6\u89E6\u53D1\u51FD\u6570",paraId:29,tocIndex:18},{value:`// type define
 subscribeWithKeys(
   func: TSubscribeFunc<TState, TEffects>,
   options: { keys?: Key[]; equalityFn?: TEqualityFn<TState> },
@@ -127,7 +128,7 @@ subscribeWithKeys(
 store.subscribeWithKeys((store, isSilent) => {
   console.log(store.getState().age)
 }, {keys: ['age']})
-`,paraId:29,tocIndex:18},{value:"\u4F7F\u7528 asyncManger \u5904\u7406\u5F02\u6B65\u4EFB\u52A1\uFF0C\u652F\u6301\u5904\u7406\u7ADE\u6001\u95EE\u9898\uFF0C\u5931\u8D25\u91CD\u8BD5\u7B49",paraId:30,tocIndex:19},{value:`// type define
+`,paraId:30,tocIndex:18},{value:"\u4F7F\u7528 asyncManger \u5904\u7406\u5F02\u6B65\u4EFB\u52A1\uFF0C\u652F\u6301\u5904\u7406\u7ADE\u6001\u95EE\u9898\uFF0C\u5931\u8D25\u91CD\u8BD5\u7B49",paraId:31,tocIndex:19},{value:`// type define
 asyncManager(
   name: string,
   options?: {
@@ -143,7 +144,7 @@ class AsyncManager {
   ...
   exec(func: () => Promise<any>): Promise<any>
 }
-`,paraId:31,tocIndex:19},{value:"name",paraId:32,tocIndex:19},{value:" \u5728\u5F53\u524D store \u4E2D\u4E0D\u91CD\u590D\u5373\u53EF",paraId:32,tocIndex:19},{value:"options",paraId:32,tocIndex:19},{value:"loadingKey",paraId:33,tocIndex:19},{value:" loading \u72B6\u6001\u503C\u7684 key ",paraId:33,tocIndex:19},{value:"default: 'loading'",paraId:33,tocIndex:19},{value:"\u3002 ",paraId:33,tocIndex:19},{value:"this.setState({[loadingKey]: true})",paraId:33,tocIndex:19},{value:"errorKey",paraId:33,tocIndex:19},{value:" error \u72B6\u6001\u503C\u7684 key ",paraId:33,tocIndex:19},{value:"default: 'error'",paraId:33,tocIndex:19},{value:"\u3002",paraId:33,tocIndex:19},{value:"this.setState({[errorKey]: err})",paraId:33,tocIndex:19},{value:"config",paraId:33,tocIndex:19},{value:"retryCount",paraId:34,tocIndex:19},{value:" \u91CD\u8BD5\u7684\u6B21\u6570",paraId:34,tocIndex:19},{value:"retryInterval",paraId:34,tocIndex:19},{value:" \u91CD\u8BD5\u7684\u65F6\u95F4\u95F4\u9694\uFF0C\u5355\u4F4D ms",paraId:34,tocIndex:19},{value:"showLoading",paraId:33,tocIndex:19},{value:" \u662F\u5426\u66F4\u65B0 loading \u72B6\u6001\u503C",paraId:33,tocIndex:19},{value:`interface StoreState {
+`,paraId:32,tocIndex:19},{value:"name",paraId:33,tocIndex:19},{value:" \u5728\u5F53\u524D store \u4E2D\u4E0D\u91CD\u590D\u5373\u53EF",paraId:33,tocIndex:19},{value:"options",paraId:33,tocIndex:19},{value:"loadingKey",paraId:34,tocIndex:19},{value:" loading \u72B6\u6001\u503C\u7684 key ",paraId:34,tocIndex:19},{value:"default: 'loading'",paraId:34,tocIndex:19},{value:"\u3002 ",paraId:34,tocIndex:19},{value:"this.setState({[loadingKey]: true})",paraId:34,tocIndex:19},{value:"errorKey",paraId:34,tocIndex:19},{value:" error \u72B6\u6001\u503C\u7684 key ",paraId:34,tocIndex:19},{value:"default: 'error'",paraId:34,tocIndex:19},{value:"\u3002",paraId:34,tocIndex:19},{value:"this.setState({[errorKey]: err})",paraId:34,tocIndex:19},{value:"config",paraId:34,tocIndex:19},{value:"retryCount",paraId:35,tocIndex:19},{value:" \u91CD\u8BD5\u7684\u6B21\u6570",paraId:35,tocIndex:19},{value:"retryInterval",paraId:35,tocIndex:19},{value:" \u91CD\u8BD5\u7684\u65F6\u95F4\u95F4\u9694\uFF0C\u5355\u4F4D ms",paraId:35,tocIndex:19},{value:"showLoading",paraId:34,tocIndex:19},{value:" \u662F\u5426\u66F4\u65B0 loading \u72B6\u6001\u503C",paraId:34,tocIndex:19},{value:`interface StoreState {
   userInfo: {
     name: string;
     id: string;
@@ -178,7 +179,7 @@ class Store extends Model<StoreState> {
     })
   }
 }
-`,paraId:35,tocIndex:20},{value:"\u6267\u884C\u6240\u6709\u8BA2\u9605\u51FD\u6570",paraId:36,tocIndex:21},{value:`// type define
+`,paraId:36,tocIndex:20},{value:"\u6267\u884C\u6240\u6709\u8BA2\u9605\u51FD\u6570",paraId:37,tocIndex:21},{value:`// type define
 interface IDispatchOptions {
   silent: boolean;
 }
@@ -187,8 +188,8 @@ dispatch(options?: IDispatchOptions)
 
 // usage
 store.dispatch();
-`,paraId:37,tocIndex:21},{value:"\u4EE5\u5DE5\u5382\u7684\u8BBE\u8BA1\u6A21\u5F0F\u521B\u5EFA Model\uFF0C\u53EA\u80FD\u7528\u4E8E\u51FD\u6570\u5F0F\u7EC4\u4EF6",paraId:38,tocIndex:22},{value:`const store = useModel(modelConfig);
-`,paraId:39,tocIndex:22},{value:"modelConfig \u53C2\u8003 ",paraId:40,tocIndex:22},{value:"ModelConfig",paraId:41,tocIndex:22}]},94810:function(t,n,e){"use strict";e.r(n),e.d(n,{texts:function(){return d}});var a=e(79493);const d=[{value:`import { Model } from 'r-model-store';
+`,paraId:38,tocIndex:21},{value:"\u4EE5\u5DE5\u5382\u7684\u8BBE\u8BA1\u6A21\u5F0F\u521B\u5EFA Model\uFF0C\u53EA\u80FD\u7528\u4E8E\u51FD\u6570\u5F0F\u7EC4\u4EF6",paraId:39,tocIndex:22},{value:`const store = useModel(modelConfig);
+`,paraId:40,tocIndex:22},{value:"modelConfig \u53C2\u8003 ",paraId:41,tocIndex:22},{value:"ModelConfig",paraId:42,tocIndex:22}]},94810:function(a,n,e){e.r(n),e.d(n,{texts:function(){return t}});var r=e(79493);const t=[{value:`import { Model } from 'r-model-store';
 import React from 'react';
 
 type State = {
@@ -272,4 +273,4 @@ export default function App() {
     </main>
   );
 }
-`,paraId:0,tocIndex:0},{value:"\u8FDB\u5165",paraId:1,tocIndex:0},{value:"\u6307\u5357",paraId:2,tocIndex:0},{value:"\u5FEB\u901F\u5F00\u59CB\u5427",paraId:1,tocIndex:0}]},16505:function(t,n,e){"use strict";var a=e(75271);function d(r,s){return r===s&&(r!==0||1/r===1/s)||r!==r&&s!==s}var u=typeof Object.is=="function"?Object.is:d,c=a.useState,p=a.useEffect,m=a.useLayoutEffect,b=a.useDebugValue;function S(r,s){var l=s(),f=c({inst:{value:l,getSnapshot:s}}),o=f[0].inst,y=f[1];return m(function(){o.value=l,o.getSnapshot=s,v(o)&&y({inst:o})},[r,l,s]),p(function(){return v(o)&&y({inst:o}),r(function(){v(o)&&y({inst:o})})},[r]),b(l),l}function v(r){var s=r.getSnapshot;r=r.value;try{var l=s();return!u(r,l)}catch(f){return!0}}function i(r,s){return s()}var I=typeof window=="undefined"||typeof window.document=="undefined"||typeof window.document.createElement=="undefined"?i:S;n.useSyncExternalStore=a.useSyncExternalStore!==void 0?a.useSyncExternalStore:I},18089:function(t,n,e){"use strict";var a=e(75271),d=e(38568);function u(i,I){return i===I&&(i!==0||1/i===1/I)||i!==i&&I!==I}var c=typeof Object.is=="function"?Object.is:u,p=d.useSyncExternalStore,m=a.useRef,b=a.useEffect,S=a.useMemo,v=a.useDebugValue;n.useSyncExternalStoreWithSelector=function(i,I,r,s,l){var f=m(null);if(f.current===null){var o={hasValue:!1,value:null};f.current=o}else o=f.current;f=S(function(){function x(_){if(!O){if(O=!0,g=_,_=s(_),l!==void 0&&o.hasValue){var M=o.value;if(l(M,_))return h=M}return h=_}if(M=h,c(g,_))return M;var P=s(_);return l!==void 0&&l(M,P)?(g=_,M):(g=_,h=P)}var O=!1,g,h,E=r===void 0?null:r;return[function(){return x(I())},E===null?void 0:function(){return x(E())}]},[I,r,s,l]);var y=p(i,f[0],f[1]);return b(function(){o.hasValue=!0,o.value=y},[y]),v(y),y}},38568:function(t,n,e){"use strict";t.exports=e(16505)},54484:function(t,n,e){"use strict";t.exports=e(18089)},62657:function(t){function n(e){if(e===void 0)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}t.exports=n,t.exports.__esModule=!0,t.exports.default=t.exports},83136:function(t,n,e){var a=e(38836),d=e(68919),u=e(75254);function c(p){var m=d();return function(){var S=a(p),v;if(m){var i=a(this).constructor;v=Reflect.construct(S,arguments,i)}else v=S.apply(this,arguments);return u(this,v)}}t.exports=c,t.exports.__esModule=!0,t.exports.default=t.exports},38836:function(t){function n(e){return t.exports=n=Object.setPrototypeOf?Object.getPrototypeOf.bind():function(d){return d.__proto__||Object.getPrototypeOf(d)},t.exports.__esModule=!0,t.exports.default=t.exports,n(e)}t.exports=n,t.exports.__esModule=!0,t.exports.default=t.exports},21742:function(t,n,e){var a=e(80038);function d(u,c){if(typeof c!="function"&&c!==null)throw new TypeError("Super expression must either be null or a function");u.prototype=Object.create(c&&c.prototype,{constructor:{value:u,writable:!0,configurable:!0}}),Object.defineProperty(u,"prototype",{writable:!1}),c&&a(u,c)}t.exports=d,t.exports.__esModule=!0,t.exports.default=t.exports},68919:function(t){function n(){if(typeof Reflect=="undefined"||!Reflect.construct||Reflect.construct.sham)return!1;if(typeof Proxy=="function")return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){})),!0}catch(e){return!1}}t.exports=n,t.exports.__esModule=!0,t.exports.default=t.exports},75254:function(t,n,e){var a=e(31759).default,d=e(62657);function u(c,p){if(p&&(a(p)==="object"||typeof p=="function"))return p;if(p!==void 0)throw new TypeError("Derived constructors may only return object or undefined");return d(c)}t.exports=u,t.exports.__esModule=!0,t.exports.default=t.exports},80038:function(t){function n(e,a){return t.exports=n=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(u,c){return u.__proto__=c,u},t.exports.__esModule=!0,t.exports.default=t.exports,n(e,a)}t.exports=n,t.exports.__esModule=!0,t.exports.default=t.exports}}]);
+`,paraId:0,tocIndex:0},{value:"\u8FDB\u5165",paraId:1,tocIndex:0},{value:"\u6307\u5357",paraId:2,tocIndex:0},{value:"\u5FEB\u901F\u5F00\u59CB\u5427",paraId:1,tocIndex:0}]}}]);
