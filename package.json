@@ -2,7 +2,6 @@
   "name": "r-model-store",
   "version": "0.0.4",
   "description": "A simple and easy-to-use react state management library",
-  "homepage": "https://chaomingd.github.io/r-store",
   "keywords": [
     "react",
     "state management",
@@ -14,31 +13,29 @@
     "react model",
     "react-model-store"
   ],
+  "homepage": "https://chaomingd.github.io/r-store",
+  "license": "MIT",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "npm run dev",
-    "dev": "dumi dev",
     "build": "father build",
     "build:watch": "father dev",
+    "change:version": "pnpm changeset && changeset version && pnpm build && pnpm lint",
+    "dev": "dumi dev",
     "docs:build": "dumi build",
     "docs:preview": "dumi preview",
-    "prepare": "husky install && dumi setup",
     "doctor": "father doctor",
     "lint": "npm run lint:es",
     "lint:css": "stylelint --fix \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint --fix \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "change:version": "pnpm changeset && changeset version && pnpm build && pnpm lint",
+    "login:repository": "sh scripts/pnpm-login.sh",
+    "prepare": "husky install && dumi setup",
     "release": "pnpm login:repository && changeset publish && git push origin --tags",
-    "login:repository": "sh scripts/pnpm-login.sh"
+    "start": "npm run dev"
   },
-  "authors": [
-    "zzengchaoming@gmail.com"
-  ],
-  "license": "MIT",
-  "files": [
-    "dist"
-  ],
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -61,12 +58,9 @@
       "prettier --parser=typescript --write"
     ]
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+  "dependencies": {
+    "@changesets/cli": "^2.29.4",
+    "use-sync-external-store": "^1.5.0"
   },
   "devDependencies": {
     "@babel/runtime": "^7.27.1",
@@ -79,20 +73,26 @@
     "ahooks": "^3.8.4",
     "antd": "^5.25.1",
     "dumi": "^2.4.13",
-    "eslint": "^8.23.0",
+    "eslint": "^9.26.0",
     "father": "^4.1.0",
     "husky": "^8.0.1",
     "immer": "^10.1.1",
-    "lint-staged": "^13.3.0",
-    "prettier": "^2.7.1",
-    "prettier-plugin-organize-imports": "^3.0.0",
-    "prettier-plugin-packagejson": "^2.2.18",
+    "lint-staged": "^16.0.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-packagejson": "^2.5.12",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "stylelint": "^14.9.1"
   },
-  "dependencies": {
-    "@changesets/cli": "^2.29.4",
-    "use-sync-external-store": "^1.5.0"
-  }
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "authors": [
+    "zzengchaoming@gmail.com"
+  ]
 }
