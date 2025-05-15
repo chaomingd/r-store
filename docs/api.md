@@ -187,7 +187,7 @@ useSelector(
 
 #### 实例
 
-```tsx
+```tsx | pure
 import React from 'react';
 import { Model } from 'r-model-store';
 
