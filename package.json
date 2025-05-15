@@ -1,6 +1,6 @@
 {
   "name": "r-model-store",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple and easy-to-use react state management library",
   "homepage": "https://chaomingd.github.io/r-store",
   "keywords": [
@@ -28,7 +28,7 @@
     "lint": "npm run lint:es && npm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\" 2> /dev/null",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "change:version": "pnpm changeset && changeset version && pnpm run build && pnpm run lint",
+    "change:version": "pnpm changeset && changeset version && pnpm build && pnpm lint",
     "release": "pnpm login:repository && changeset publish && git push origin --tags",
     "login:repository": "sh scripts/pnpm-login.sh"
   },

@@ -1,25 +1,25 @@
 # r-store
-`r-model-store` is a lightweight and powerful React state management library designed to simplify state management through object-oriented and publish-subscribe design patterns. It provides an intuitive API and flexible extensibility, suitable for global, page-level, and component-level state management scenarios. [doc](https://chaomingd.github.io/r-store/)
+`r-model-store` 是一个轻量级、功能强大的 React 状态管理库，旨在通过面向对象和发布订阅的设计模式简化状态管理。它提供了直观的 API 和灵活的扩展能力，适合全局、页面级和组件级的状态管理场景。
 
-## Core Features
-- **Object-Oriented Design**  
-  By extending the `Model` class, developers can easily define state and operational logic, resulting in clear and maintainable code structures.
+## 核心特性
+- 面向对象的设计
+通过创建Model实例或继承 Model 类，开发者可以轻松定义状态和操作逻辑，代码结构清晰，易于维护。
 
-- **Precise Component Updates**  
-  Provides methods like `useGetState` to enable selective subscription to specific state fields, ensuring that only the relevant components re-render when those fields change.  
+- 精准组件更新
+提供 useGetState 等方法，支持按需订阅状态字段，避免不必要的组件重渲染。
 
-- **Built-in `computed` and `watch` Features**  
-  The `computed` feature enables derived state calculations, allowing you to generate new state values based on existing ones and avoid redundant logic.  
-  The `watch` feature allows you to monitor state changes and execute specific callback logic when the state changes, making it easier to handle side effects.
+- 内置`computed`、`watch`功能  
+`computed` 提供了对状态的派生计算能力，支持基于现有状态生成新的状态值，避免重复逻辑。  
+`watch` 提供了对状态变化的监听能力，支持在状态发生变化时执行特定的回调逻辑，便于处理副作用。
 
-- **Asynchronous Handling**  
-  Supports handling asynchronous race conditions and retrying failed operations through the `asyncManager`.
+- 异步处理
+通过asyncManager支持对异步竞态问题的处理，失败重试的功能.
 
-- **Flexible Extensibility**  
-  Enables flexible code writing by extending the `Model` class in an object-oriented manner.
+- 灵活的扩展能力
+通过继承Model类的面向对象的方式灵活编写代码
 
-- **Seamless Integration with React**  
-  Offers an intuitive API, reducing the learning curve and enabling quick adoption.
+- 与 React 无缝集成
+提供直观的 API，降低学习成本，快速上手。
 
 ## Quick Start
 Define state and operational logic by creating a `Model` instance or extending the `Model` class:
