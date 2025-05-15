@@ -82,9 +82,6 @@ const LastName = () => {
 export default function App() {
   return (
     <main
-      style={{
-        color: '#000',
-      }}
     >
       <FirstName />
       <LastName />

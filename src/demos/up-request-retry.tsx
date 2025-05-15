@@ -52,11 +52,7 @@ export default () => {
   });
   const { loading, result } = model.useGetState();
   return (
-    <div
-      style={{
-        color: '#000',
-      }}
-    >
+    <div>
       <button type="button" onClick={() => model.getEffect('fetch')()}>
         fetch
       </button>

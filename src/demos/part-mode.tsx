@@ -62,9 +62,6 @@ export default () => {
   const [value, setValue] = React.useState('');
   return (
     <div
-      style={{
-        color: '#000',
-      }}
     >
       <div>
         受控组件：

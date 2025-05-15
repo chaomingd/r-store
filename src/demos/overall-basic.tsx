@@ -63,9 +63,6 @@ export default function App() {
   // 内部会根据传入的keys进行浅比较，只有对应到值变更时组件才会重新渲染
   return (
     <main
-      style={{
-        color: '#000',
-      }}
     >
       <label>
         First name

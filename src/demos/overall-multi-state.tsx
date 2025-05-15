@@ -82,9 +82,6 @@ const Fishi = () => {
 function App() {
   return (
     <div
-      style={{
-        color: '#000',
-      }}
     >
       <Bear />
       <Fishi />

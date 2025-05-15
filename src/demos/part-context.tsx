@@ -237,9 +237,6 @@ export default () => {
   const [value, setValue] = React.useState<Key[]>([]);
   return (
     <div
-      style={{
-        color: '#000',
-      }}
     >
       <div>
         选中的值：

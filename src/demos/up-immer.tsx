@@ -55,11 +55,7 @@ export default () => {
   }, []);
   const { todos } = model.useGetState();
   return (
-    <div
-      style={{
-        color: '#000',
-      }}
-    >
+    <div>
       <button type="button" onClick={() => model.addTodo()}>add todo</button>
       {todos.map((todo) => (
         <div key={todo.id}>

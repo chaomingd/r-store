@@ -33,9 +33,6 @@ export default function App() {
   const { count, countSq } = store.useGetState(['count', 'countSq']);
   return (
     <div
-      style={{
-        color: '#000',
-      }}
     >
       <button type="button" onClick={() => store.setState({ count: count + 1 })}>+</button>
       <button type="button" onClick={() => store.setState({ count: count - 1 })}>-</button>

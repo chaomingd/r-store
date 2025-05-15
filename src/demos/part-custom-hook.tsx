@@ -25,9 +25,6 @@ const Input = () => {
   const { value } = model.useGetState();
   return (
     <div
-      style={{
-        color: '#000',
-      }}
     >
       userName:
       <input

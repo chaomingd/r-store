@@ -31,9 +31,7 @@ export default function() {
   }, [keyword])
 
   return (
-    <div style={{
-      color: '#000'
-    }}>
+    <div>
       <input value={keyword} onChange={(e) => setKeyword(e.target.value)} />
       <div>
         {loading ? 'loading...' : result}
