@@ -1,4 +1,4 @@
-"use strict";(self.webpackChunkr_model_store=self.webpackChunkr_model_store||[]).push([[430],{52745:function(a,t,e){e.r(t),e.d(t,{demos:function(){return r}});var o=e(75271),n=e(25019),r={}},30030:function(a,t,e){e.r(t),e.d(t,{demos:function(){return r}});var o=e(75271),n=e(57678),r={}},95414:function(a,t,e){e.r(t),e.d(t,{texts:function(){return n}});var o=e(25019);const n=[{value:"Create a Model instance to manage React state.",paraId:0,tocIndex:1},{value:`interface State {
+"use strict";(self.webpackChunkr_model_store=self.webpackChunkr_model_store||[]).push([[430],{72507:function(a,t,e){e.r(t),e.d(t,{demos:function(){return r}});var o=e(75271),n=e(23664),r={}},91800:function(a,t,e){e.r(t),e.d(t,{demos:function(){return r}});var o=e(75271),n=e(40048),r={}},78433:function(a,t,e){e.r(t),e.d(t,{texts:function(){return n}});var o=e(23664);const n=[{value:"Create a Model instance to manage React state.",paraId:0,tocIndex:1},{value:`interface State {
   ....
 }
 const store = new Model<State>(modelConfig);
@@ -188,7 +188,7 @@ dispatch(options?: IDispatchOptions)
 // Usage
 store.dispatch();
 `,paraId:38,tocIndex:21},{value:"Create a Model using the factory design pattern. Can only be used in functional components.",paraId:39,tocIndex:22},{value:`const store = useModel(modelConfig);
-`,paraId:40,tocIndex:22},{value:"modelConfig",paraId:41,tocIndex:22},{value:" reference: ",paraId:41,tocIndex:22},{value:"ModelConfig",paraId:42,tocIndex:22}]},9503:function(a,t,e){e.r(t),e.d(t,{texts:function(){return n}});var o=e(57678);const n=[{value:`import { Model } from 'r-model-store';
+`,paraId:40,tocIndex:22},{value:"modelConfig",paraId:41,tocIndex:22},{value:" reference: ",paraId:41,tocIndex:22},{value:"ModelConfig",paraId:42,tocIndex:22}]},9422:function(a,t,e){e.r(t),e.d(t,{texts:function(){return n}});var o=e(40048);const n=[{value:`import { Model } from 'r-model-store';
 import React from 'react';
 
 type State = {

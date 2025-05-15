@@ -1,4 +1,4 @@
-"use strict";(self.webpackChunkr_model_store=self.webpackChunkr_model_store||[]).push([[904],{60568:function(a,n,e){e.r(n),e.d(n,{demos:function(){return o}});var r=e(75271),t=e(61203),o={}},53028:function(a,n,e){e.r(n),e.d(n,{demos:function(){return o}});var r=e(75271),t=e(79493),o={}},5051:function(a,n,e){e.r(n),e.d(n,{texts:function(){return t}});var r=e(61203);const t=[{value:"\u521B\u5EFA Model \u5B9E\u4F8B\u5373\u53EF\u7BA1\u7406 react \u72B6\u6001",paraId:0,tocIndex:1},{value:`interface State {
+"use strict";(self.webpackChunkr_model_store=self.webpackChunkr_model_store||[]).push([[904],{34948:function(a,n,e){e.r(n),e.d(n,{demos:function(){return o}});var r=e(75271),t=e(7970),o={}},42742:function(a,n,e){e.r(n),e.d(n,{demos:function(){return o}});var r=e(75271),t=e(2157),o={}},57524:function(a,n,e){e.r(n),e.d(n,{texts:function(){return t}});var r=e(7970);const t=[{value:"\u521B\u5EFA Model \u5B9E\u4F8B\u5373\u53EF\u7BA1\u7406 react \u72B6\u6001",paraId:0,tocIndex:1},{value:`interface State {
   ....
 }
 const store = new Model<State>(modelConfig);
@@ -189,7 +189,7 @@ dispatch(options?: IDispatchOptions)
 // usage
 store.dispatch();
 `,paraId:38,tocIndex:21},{value:"\u4EE5\u5DE5\u5382\u7684\u8BBE\u8BA1\u6A21\u5F0F\u521B\u5EFA Model\uFF0C\u53EA\u80FD\u7528\u4E8E\u51FD\u6570\u5F0F\u7EC4\u4EF6",paraId:39,tocIndex:22},{value:`const store = useModel(modelConfig);
-`,paraId:40,tocIndex:22},{value:"modelConfig \u53C2\u8003 ",paraId:41,tocIndex:22},{value:"ModelConfig",paraId:42,tocIndex:22}]},94810:function(a,n,e){e.r(n),e.d(n,{texts:function(){return t}});var r=e(79493);const t=[{value:`import { Model } from 'r-model-store';
+`,paraId:40,tocIndex:22},{value:"modelConfig \u53C2\u8003 ",paraId:41,tocIndex:22},{value:"ModelConfig",paraId:42,tocIndex:22}]},80709:function(a,n,e){e.r(n),e.d(n,{texts:function(){return t}});var r=e(2157);const t=[{value:`import { Model } from 'r-model-store';
 import React from 'react';
 
 type State = {
